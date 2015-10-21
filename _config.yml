@@ -34,7 +34,6 @@ my:
     skills:
         frontend: ["HTML | Markdown","JavaScript"]
         backend: ["ASP.NET MVC", "PHP", "Node.js"]
-		database: ["MS SQL Server", "MariaDB | MySQL", "SQLite"]
         tools: ["Visual Studio", "Git", "Linux"]
 
 collections:
