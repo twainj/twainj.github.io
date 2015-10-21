@@ -20,17 +20,17 @@ description: "TwainJ's dev weblog, on tech, particularly code"
 
 my:
     displayName: TwainJ
-    realName: Jason
+    realName: "Jason Jones"
     jobTitle: "Developer"
     contact:
-        email: fanghao90s@gmail.com
+        email: jason@2jdevelopment.com
         github: https://github.com/twainj
         stackoverflow: http://stackoverflow.com/users/57001/twainj
         tel: 15416004096
         address:
-            country: USA
-            state: Oregon
             city: Prineville
+            state: Oregon
+            country: USA
     skills:
         frontend: ["HTML | Markdown","JavaScript"]
         backend: ["ASP.NET MVC", "PHP", "Node.js"]

@@ -12,7 +12,7 @@ layout: base
 
     <section id="intro">
         <h2>Hello!</h2>
-        <p>I'm afraid I'm sliding into this blog business, so this information was thrown together quick. I hope to update soon with more thorough/accurate information.</p>
+        <p>I'm afraid I'm sliding into this blog business sidways, so this information was thrown together quick. I hope to update soon with more thorough/accurate information.</p>
 		<p>I'm also new to Jekyll, and hacking on a template I didn't create, so if you see something strange, I'd love a heads up!</p>
     </section>
 
@@ -30,12 +30,6 @@ layout: base
             <li>{{ skill }}</li>
             {% endfor %}
         </ul>
-        <ul id="database">
-            <i class="fa fa-wrench">Database</i>
-            {% for skill in my.skills.database %}
-            <li>{{ skill }}</li>
-            {% endfor %}
-        </ul>
         <ul id="tools">
             <i class="fa fa-wrench">Tools</i>
             {% for skill in my.skills.tools %}
@@ -48,7 +42,7 @@ layout: base
         <h2>FIND ME ON</h2>
         <ul>
             <li><a href="{{ my.contact.github }}"><i class="fa fa-github"></i></a></li>
-            <li><a href="{{ my.contact.stackoverflow }}"><i class="fa fa-qq"></i></a></li>
+            <li><a href="{{ my.contact.stackoverflow }}"><i class="fa fa-stack-overflow"></i></a></li>
         </ul>
     </section>
 
