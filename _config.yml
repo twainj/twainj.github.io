@@ -12,35 +12,30 @@ excerpt_separator: "[-----]"
 
 # mode: dev
 mode: product
-url: https://unifreak.github.io/
+url: https://twainj.github.io/
 devurl: http://localhost:4000/
-name: UniFreak
-title: UniFreak | Another yet unique freak is showing a freakshow
-description: "Fanghao's personal weblog, on coding or such stuff"
+name: TwainJ
+title: TwainJ | DevBlog
+description: "TwainJ's dev weblog, on tech, particularly code"
 
 my:
-    displayName: UniFreak
-    realName: FangHao
-    realName_cn: 方浩
-    jobTitle: "PHP Coder"
+    displayName: TwainJ
+    realName: Jason
+    jobTitle: "Developer"
     contact:
-        qq: 744910240
         email: fanghao90s@gmail.com
-        github: http://www.github.com/UniFreak
-        qzone: http://744910240.qzone.qq.com
-        pinterest: https://www.pinterest.com/miblah/
-        tel: 15671542698
+        github: https://github.com/twainj
+        stackoverflow: http://stackoverflow.com/users/57001/twainj
+        tel: 15416004096
         address:
-            country: China
-            state: Hubei
-            city: Wuhan
-            distribute: Hongshan
-            postcode: 450000
-            cell: "XuefuJiayuan"
+            country: USA
+            state: Oregon
+            city: Prineville
     skills:
-        frontend: ["HTML | Markdown", "CSS | SASS", "JS | jQuery", "Bootstrap"]
-        backend: ["PHP", "MySQL", "Redis", "Regex", "Laravel", "OSC"]
-        tools: ["Sublime Text", "Git | Github", "Linux", "Jekyll | Liquid"]
+        frontend: ["HTML | Markdown","JavaScript"]
+        backend: ["ASP.NET MVC", "PHP", "Node.js"]
+		database: ["MS SQL Server", "MariaDB | MySQL", "SQLite"]
+        tools: ["Visual Studio", "Git", "Linux"]
 
 collections:
     qqGroupGuide:

@@ -11,28 +11,33 @@ layout: base
     </header>
 
     <section id="intro">
-        <h2>HIYA!</h2>
-        <p>一个 PHP 程序员, 技术宅, 总是在追求上进的吹毛求疵者</p>
-        <p>除了敲代码, 还喜欢看书, 听音乐, 以及猫猫狗狗</p>
-        <p>业余时间你会看到我不是在像模像样的弹吉他, 就是骑着车子在城里晃荡</p>
+        <h2>Hello!</h2>
+        <p>I'm afraid I'm sliding into this blog business, so this information was thrown together quick. I hope to update soon with more thorough/accurate information.</p>
+		<p>I'm also new to Jekyll, and hacking on a template I didn't create, so if you see something strange, I'd love a heads up!</p>
     </section>
 
     <section id="skillsets">
         <h2>SKILLSETS</h2>
         <ul id="frontend">
-            <i class="fa fa-tv">前端</i>
+            <i class="fa fa-tv">Client Side</i>
             {% for skill in my.skills.frontend %}
             <li>{{ skill }}</li>
             {% endfor %}
         </ul>
         <ul id="backend">
-            <i class="fa fa-cog"> 后端</i>
+            <i class="fa fa-cog">Server Side</i>
             {% for skill in my.skills.backend %}
             <li>{{ skill }}</li>
             {% endfor %}
         </ul>
+        <ul id="database">
+            <i class="fa fa-wrench">Database</i>
+            {% for skill in my.skills.database %}
+            <li>{{ skill }}</li>
+            {% endfor %}
+        </ul>
         <ul id="tools">
-            <i class="fa fa-wrench"> 工具</i>
+            <i class="fa fa-wrench">Tools</i>
             {% for skill in my.skills.tools %}
             <li>{{ skill }}</li>
             {% endfor %}
@@ -43,8 +48,7 @@ layout: base
         <h2>FIND ME ON</h2>
         <ul>
             <li><a href="{{ my.contact.github }}"><i class="fa fa-github"></i></a></li>
-            <li><a href="{{ my.contact.qzone }}"><i class="fa fa-qq"></i></a></li>
-            <li><a href="{{ my.contact.pinterest }}"><i class="fa fa-pinterest"></i></a></li>
+            <li><a href="{{ my.contact.stackoverflow }}"><i class="fa fa-qq"></i></a></li>
         </ul>
     </section>
 
@@ -52,7 +56,7 @@ layout: base
         <h2>MORE</h2>
         <a href="{{ crturl }}building">查看我的在线简历</a>
         <span> 或 </span>
-        <a href="mailto:{{ my.contact.email }}">给我写邮件</a>
+        <a href="mailto:{{ my.contact.email }}">Email</a>
     </section>
 
 </div>
