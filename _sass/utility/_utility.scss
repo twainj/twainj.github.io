@@ -3,6 +3,18 @@
  * Utility
  * ----------------------------------------------------------------------------------------
  */
+ @mixin float-left {
+   float: left;
+ }
+ @mixin float-right {
+   float: right;
+ }
+ @mixin clearfix {
+   overflow: hidden;
+   *zoom: 1;
+ }
+
+
  .text-left {
     text-align: left;
  }
@@ -31,3 +43,16 @@
     margin-bottom: -99999px;
     padding-bottom: 99999px;
  }
+
+@mixin box-shadow($params) {
+  -webkit-box-shadow: $params;
+  -moz-box-shadow: $params;
+  box-shadow: $params;
+}
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}

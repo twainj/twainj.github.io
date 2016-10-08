@@ -19,6 +19,10 @@ name: TwainJ
 title: TwainJ | DevBlog
 description: "TwainJ's dev weblog, on tech, particularly code"
 
+sass:
+  sass_dir: _sass
+
+
 my:
     displayName: TwainJ
     realName: "Jason Jones"
