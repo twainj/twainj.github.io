@@ -4,14 +4,15 @@ markdown: redcarpet
 redcarpet:
   extensions: ["no_intra_emphasis", "fenced_code_blocks", "autolink", "tables", "with_toc_data"]
 
+gems: [jekyll-paginate]
 paginate: 7
 paginate_path: "page:num"
 layout: post
 permalink: /:categories/:title
 excerpt_separator: "[-----]"
 
-# mode: dev
-mode: product
+mode: dev
+# mode: product
 url: https://twainj.github.io/
 devurl: http://localhost:4000/
 name: TwainJ
