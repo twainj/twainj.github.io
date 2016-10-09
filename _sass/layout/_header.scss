@@ -4,7 +4,7 @@
  * ----------------------------------------------------------------------------------------
  */
 #l-header {
-    background-color: rgb(28, 51, 64);
+    background-color: $colPrimary;
     color: white;
 
     h1 {
@@ -154,11 +154,11 @@
         }
 
         .subnav li {
-            background: rgba(18, 27, 32, 1);
+            background: $colDark;
         }
 
         .subnav li:hover {
-            background: darken(rgba(18, 27, 32, 1), 5);
+            background: darken($colDark, 5);
         }
 
         .navicon {

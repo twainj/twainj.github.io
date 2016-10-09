@@ -13,8 +13,12 @@ $baseline: $base-font-size * 1.5;
 /* Color */
 $navbg: #eee;
 $articlebg: $navbg + 8;
-$headerbg: #1C3340;
-$searchbd: rgb(51, 122, 183);
+
+$colHighlight3: #8bb3c1; // active page item bg, tag bg
+$colHighlight2: #337ab7; // grid input text, page item border and box-shadow, link hover/visit text
+$colHighlight1: #23527c; // grid focused link
+$colPrimary: #1c3340; // header bg, h2 text, h2 border, various other text, background (including selected item bg), borders and box-shadows
+$colDark: #121b20; // subnav item bg
 
 /* Positioning */
 $margin-multiplier: 2;
