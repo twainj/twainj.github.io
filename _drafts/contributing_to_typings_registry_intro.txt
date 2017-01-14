@@ -1,0 +1,30 @@
+I've been exploring the world of TypeScript, and learning to mix it in with the JavaScript projects I have on hand - hopefully soon to make it the core of them. One of the necessary pieces to working with TypeScript where once the code was exclusively JavaScript are typings. They make it very easy to treat JavaScript libraries as valid TypeScript, and include them in a modular fashion. 
+
+For many popular libraries, there is a very nice ecosystem for finding them in the wild and including them. But today I discovered that the JsViews library is not yet part of that ecosystem. Faced with creating the the typing myself, I realized this is a good opportunity to walk through the process of contributing to that ecosystem. So this, and the next few posts will be that journey. 
+
+So first a bit of start up info.
+
+**What are Typings?**
+
+Typings are more explicitly called *type definitions* - specific files that create definitions for objects created in JavaScript, so that they can be consumed - created, referenced, etc - by TypeScript code. They come in *.d.ts files, and they mean I don't have to avoid JavaScript libraries that would otherwise accelerate my development. They could also mean that I don't have to convert legacy JavaScript code to TypeScript before I can use it. At least not all of it. Just the type definitions.
+
+**Where can I find them?**
+
+The good news, as I mentioned is that many of these already exist for popular libraries, so I, as a developer, am not required to define them all myself.  Chances are, most of the well-known libraries you are already familiar with have type definitions ready for you to pull in and use.
+
+There are two main registries that can point you to them, and CLI tools based on Node.js that can be used to install them. They are the [Typescript Definition Manager (TSD)](https://www.npmjs.com/package/tsd) TSD, now deprecated or worse, which uses the [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped) registry, and [Typings](https://www.npmjs.com/package/typings) (ingeniously named), which has its own registry, and can reference others as well. 
+
+The new Typings is the way to go, but for various reasons, it is worth knowing about TSD, because its registry is still in use by Typings, and I found that most of the libraries I was using were coming from there. The usage of Typings is well documented in the [Typings repository readme](https://github.com/typings/typings), so check that out first for basic usage, and if you need any clarity on what that "ambient" stuff means, and how the DefinitelyTyped registry is connected, I found [Blake Embrey's explanation](http://angularclass.com/the-state-of-typescript-packages/) a helpful starting place.
+
+**Filling in the gaps**
+
+Not everything is in there, however. I was rattling along on a PhoneGap project, using [JsRender](http://www.jsviews.com/#jsrender) for my templating, when I decided that I could truly take advantage of an MVVM pattern if I were to step up that game and use JsViews. JsRender had been a slam dunk when I went looking for the type definitions, but it turns out that neither repository has a typing file for JsViews. 
+
+So if I want to use it in my TypeScript project, I will need to create those definitions myself. And since I'm interested in contributing those definitions back to the typings ecosystem, it means there will be a few steps I have to consider:
+
+1. First I have to create the type definitions, obviously
+2. My definitions won't be immediately included in the registry, so I need to connect my project to the definitions with interim bindings, until my contribution is accepted
+3. I'll need to find the way the maintainers of the Typings registry prefer contributions, and follow that process
+4. Once my definitions are accepted, I can update my project to use the definitions from the official source
+
+I expect I'll have about one post per step. Here we go!

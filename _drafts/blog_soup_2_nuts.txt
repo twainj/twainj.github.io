@@ -1,0 +1,14 @@
+Installing jekyll on Ubuntu 14.04
+
+Install ruby 2.3. Actually, I think ruby2.0 would have worked
+
+Install ruby 2.3 - need ppa:
+sudo apt-add-repository ppa:brightbox/ruby-ng
+sudo apt-get update
+
+sudo apt-get install ruby2.3 ruby2.3-devsudo 
+
+sudo gem install jekyll
+sudo gem install bundle
+bundle install
+This last one takes awhile

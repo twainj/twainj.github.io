@@ -1,0 +1,8 @@
+avahi for ad-hoc network set up
+Checkout the way of changing the hostname for a linux machine
+raspbery pi /w camera module to capture "security" cams
+	Legos for the cam container - cause it's cool, and would be fun to include Hannah and Sam in building those and testing the cam system
+A server that tracks current state of the presentation
+Most of the display on client side program run in browser set to full-screen (browserify)
+"Slides" added to the deck, each has it's own action list that can be set on it (probably defined internally by the slide object)
+	Maybe give the slides an iterator so that we can iterate over them until finished, slide.end telling us it is time to move to the next slide

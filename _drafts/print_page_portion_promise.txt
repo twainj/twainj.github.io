@@ -1,0 +1,7 @@
+
+
+Feature detection for window.onafterprint and MediaQueryList: 
+https://jsfiddle.net/171q0u3u/
+
+Code and testing:
+https://jsfiddle.net/twainj/96b4t39f/4/

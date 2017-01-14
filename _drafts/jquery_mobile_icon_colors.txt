@@ -1,0 +1,45 @@
+I've recently had reason to become familiar with the Node.js ecosystem, including the Node Package Manager, and some desktop tools built on it - viz., PhoneGap. So I've gotten in the recent habit, when I have busy work at hand, of thinking, "I bet Node can do that."
+
+I'm working on a mobile app, using PhoneGap - which is now powered by Node, hence my acquaintance with it - and jQuery Mobile as the framework for the frontend. I'm not a strong styler, so when I was handed the design, I wasted little time pulling out the Theme Roller (themeroller.jquerymobile.com) to do the bulk of my work. It does most of the heavy lifting, then I modify the few things that are not covered by the tool. Gradient colors, some interesting layout choices, etc. But one item in the design proved a bit arcane, and busy work.
+
+The standard icon set in jQuery Mobile comes in two colors. The standard (currently white) and the alt (black). Oddly, these can't be changed with the theme roller. This is a little surprising to me, but there it is. I did a little looking around to see if anyone had a solution, and while I found plenty of information on how to change those colors, it was all manual changes to the specific icons of interest. I'd rather not keep track of which icons I've changed and remember how to do it when another comes up. I've got a theme after all. I want to do them all. Busy work.
+
+I bet Node can do that.
+
+So the tl;dr is that I now have a node utility that I can run to update the theme with standard and alt colors. You can install it from npm. It's called jqm-svgicon-color. I'll run you through how to use it, for those that just want to get the job done. Then, following, I'll talk through the creation of the package, for those that want to know how it works, and how I approached it.
+
+**Using jqm-svgicon-color**
+Use of the utility is simple enough. Install it as normal using npm.
+
+    npm install jqm-svgicon-color jquery.mobile.icons.min.css ababab cdcdcd
+
+It exports one function which can process a theme CSS file. Simply specify the desired standard and alt colors for the icons.
+
+    var jic = require('./jqm-svgicon-color.js');
+    jic('jquery.mobile.icons.min.css', 'ababab', 'cdcdcd');
+
+The function can be run directly from the command line by invoking the exec.js script.
+
+    node ./node_modules/jqm-svgicon-color/exec.js jquery.mobile.icons.min.css ababab cdcdcd
+
+**Understanding jqm-svgicon-color**
+
+First, it was necessary to see if SVG is even supported  by the mobile versions I'm targetting, as jQuery Mobile uses PNGs as a back up for those that don't - and that would complicate the script a great deal.
+
+http://caniuse.com/#feat=svg
+
+Fortunately I am aiming for later mobile versions, so I'll skip the PNGs.
+
+There are some distinct technologies that I will have to process. Fortunately, Node.JS has modules ready to use:
+
+1. CSS parsing - (https://github.com/reworkcss/css)
+* npm install css
+	
+2. Decode the CSS SVG, which is URL encoded
+* decodeURIComponent()
+
+3. SVG XML parsing - https://github.com/Leonidas-from-XIV/node-xml2js
+* npm install xml2js
+
+
+documentation on this one is a little thin for DOCTYPE element, a little debugging was necessary

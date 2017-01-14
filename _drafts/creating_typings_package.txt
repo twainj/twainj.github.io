@@ -1,0 +1,79 @@
+I want to include JsViews in the TypeScript project that I am working on, but have discovered that there are no type definitions for the library that I can use. So I'm going to have to create my own.  Fortunately, I have lots of starting places to help me get there.
+
+**The shape of a Typings contribution**
+
+I find, according to the ReadMe in the [Typings registry repository](https://github.com/typings/registry), that I can create my own typings using something called [generator-typings](https://github.com/typings/generator-typings), which turns out to be a way of generating a blank project that follows the proper workflow for contributing to the Typings registry. It uses [Yeoman](http://yeoman.io/), which I've never heard of - except as an entry in a list of buzzwords, and describing the social standing of Robin of Locksley - but it calls itself a "generator ecosystem", and looks like a very useful way of aiding contributors in open source project, giving them a working starting place.
+
+And that's exactly what it will do for me.
+
+So, in a folder setup for the cause (I've been encouraged to call it "typed-&lt;library>", so it shall be the typed-jsviews folder), we install and run the generator:
+    
+    npm install yo -g
+    npm install generator-typings -g
+    yo typings
+What follows is a series of questions to answer which will be used to create the package. It includes information to connect to a GitHub repository, which appears to be the preferred location for sharing the source. So I've created my repository and you can find it at [github.com/twainj/typed-jsviews](https://github.com/twainj/typed-jsviews). It appears to attempt checking in the files automatically for the first commit, but I had a non-fatal error that occurred there, which probably has to do with my working on a Windows machine (I did execute this from the git bash, but sometimes that doesn't quite behave).
+
+So I had to create the remote, add all of the files to the repo and commit. I added a .gitignore file, of course, and included the node_modules folder. Now, according to the readme which was include by the generator, I can build and test my project with some ready-made scripts:
+
+    npm run build
+    npm run test
+Very nice.
+
+The build script packages up the content of the index.d.ts file into files in the "out" folder (separate files for browser or Node.js use, as it turns out), which clues me in that I don't want to be tracking that folder. So that gets removed from the repo, and added to .gitignore.
+
+The test script is failing. It complains of a missing module called "blue-tape" which is referenced in the test.ts file. This is disconcerting, and I found some discussion about this error occurring for other npm packages, but for now I'm going to ignore it. Eventually, when I am looking to contribute, I'll need to understand the testing expectations, and navigate those waters so that I have passing tests. But for now, it is just a distraction.
+
+**Creating my definitions**
+
+Fortunately for me, the JsViews library is something like a super-set of the JsRender library, and there are already type definitions for JsRender. So I'm going to use that as a starting place. The typing is [found in the DefinitelyTyped repository](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/jsrender/jsrender.d.ts), created by a [Kensuke Matsuzaki](https://github.com/zakki).
+
+Scanning through the JsViews source code, I can see that it could be a lengthy process to try and grok it all and create exhaustive type definitions. So I am going to include pieces as I need them. The place where I ended up breaking was when I was trying to get the current view in an event handler, using ```$.view(this)```, as demonstrated in [one of the JsViews samples](http://www.jsviews.com/#samples/data-link/hover):
+
+```javascript
+peopleTmpl.link("#people", data)
+  .on("mouseover", ".person", function() {
+    // Get the view for this person (the one we moused over...)
+    $.view(this)
+      // Find the element with class "details" within this view
+      .contents(true, ".details")
+      // Make it visible
+      .show();
+  })
+```
+
+To enable this, I need to add the View function/object, which is actually defined in JsRender, but augmented in JsViews. So, starting with Matsuzaki's type definitions, I add a View interface, with members defined based on the [its documentation](http://www.jsviews.com/#viewobject):
+
+```typescript
+interface View {
+    (context: any): any;
+
+    type: string;
+    data: any;
+    parent: View;
+    index: number;
+    getIndex(): number;
+    get(type: string);
+    get(deep: boolean, type: string): View;
+    content: Template;
+}
+```
+
+Then it needs to be added to the JQuery object:
+
+```typescript
+interface JQueryStatic {
+    render: JsRender.RenderStatic;
+    views: JsRender.Views;
+    
+    // Added this line
+    view: JsRender.View;
+    
+    templates(markupOrSelector: string): JsRender.Template;
+    templates(name: string, markupOrSelector: string): JsRender.Template;
+    templates(namedTemplates: any): any;
+}
+```
+
+And we have a type definition! Or at least a start. Use of the JsViews library will gradually show what pieces might be missing. But even now we can use this definition and include a reference to it in a project.
+For more information on gettings started with creating type definitions - and getting unblocked without defining a full library definition - I highly recommend [Steve Fenton's post on the subject](https://www.stevefenton.co.uk/2013/01/complex-typescript-definitions-made-easy/).
+That next time.

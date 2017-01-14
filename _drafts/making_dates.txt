@@ -1,0 +1,96 @@
+---
+title: "Making Dates"
+layout: post
+category: programming
+tags: [JavaScript, DateTime, Web, Problem-Solving]
+excerpt: "Dates seem simple, but that is the deception of familiarity. This is the process I went through to establish confidence in my dates."
+---
+
+Dates are like [names](https://www.kalzumeus.com/2010/06/17/falsehoods-programmers-believe-about-names/). They seem simple, but that is the deception of familiarity. In truth there are many complications that only become apparent when we are given the task of generalizing our usage of them. Alas, generalizing usage is almost a definitive task of the programmer.
+
+Note some of these complications (I don't claim it is exhaustive):
+
+	* Expected date notation changes with locale (in the US, 8/10/2016 is August tenth, in the UK, it would be October eighth)
+	* Parsing
+	* Timezones
+	* A language may have zero based partitions (i.e., months in JavaScript: new Date(2016, 7, 10); // August tenth)
+	* A "Date" is often, programmatically, a "Date and Time"
+	* But not always
+	* Parsing
+	* Internal encoding of dates may be different for different tiers (many DBs default to strings, most languages prefer "milliseconds from epoch")
+	* Parsing
+	
+And this isn't simply a list that can be tackled one at a time when sorting out date usage in a particular system. They interact with each other to form new complications. I may not give a flipping blip about timezones, as I only care about dates, but if I my language considers all dates to include time, I will have to deal with them regardless. And for that matter, parsing a date is complicated by every other bullet point in the list.
+
+As I was working on a web application, I discovered that a particular piece of functionality was manifesting a profusion of bugs around dates. And most of them were semantic. Nothing was breaking, but I had to have an eagle eye to catch when dates were not the ones I expected. For awhile I went on fixing individual issues as they came up, but I soon realized I'd have serious maintenance issues if I didn't come up with a set of conventions to ensure accuracy. And accuracy was required. Some of the functionality involved billing dates. Not a place to lack confidence in accuracy. This is the process I went through to establish confidence in my dates.
+
+I counted and discovered that I had six main "types" of dates:
+
+	* Database stored dates - in a legacy database I could not alter. It took no account of timezones.
+	* Dates as processed by the server scripts - where I had limited agency for change
+	* Dates transfering across tiers - from those server scripts to client side HTML5/JS
+	* Dates displayed to the user - in simple text
+	* JavaScript native dates - for date math and processing on the front end
+	* Dates input from HTML in <input type="date"/> elements - which proved surprisingly troublesome 
+
+Just identifying these six types set me well on my way to taming the beast. The next thing is to know where I have agency for change. As already implied, it was mostly limited on the server, mostly free on the client:
+
+	* Database - no agency
+	* Server - no agency in business logic
+	* Server - agency granted over communication with client
+	* Client - free reign
+
+Now the path begins to become clear. I need to know what form the dates will have coming out of the database, and resulting from the processes that the server makes, but as no change is allowed, no change is required. So I can go about setting my conventions, and requirements:
+
+	* All date data will be transferred between client and server using ISO8601
+	* All dates on the client will be dealt with as JavaScript Date objects
+	* There will be the odd case where the server generates dates for display directly in HTML
+	
+This helps me clearly define the interfaces between various data, so I can create code that will be used by convention to accommodate those interfaces.
+
+**Data transfer via ISO8601**
+I settled on this format largely because it helps me resolve timezone issues - which I would like to be ignorant of, and because there are many utilities already in place for creating and consuming dates in this form. This is what an ISO8601 date looks like:
+
+"2016-08-10T00:00:00.000Z"
+
+The most interesting part of this format, in my case, is the "Z". It tells the consumer that this date is in Zulu time, that is, the GMT timezone. But I don't care about timezones. Why? Because while my app does have requirements for multiple tenants, and there could be users potentially around the world, I can make the particular assertion that all users of a given tenancy will be in the same timezone. Moreover, it turns out that the dates stored in the database ignore all timezones, possibly because of this assertion.
+
+The ISO format allows for an assumed "local" time, by dropping the "Z". I had hoped this would be honored by the JavaScript parsing functions (both ```Date.parse()```, and the constructor, ```new Date()```) but alas, this is not the case. 
+
+If I create a JS date with an ISO8601 string:
+
+```JavaScript
+new Date('2016-08-10T00:00:00.000Z'); // Tue Aug 09 2016 17:00:00 GMT-0700 (Pacific Daylight Time)
+```
+
+It is automatically converted to local timezone, which, as in the West Coast US, is *the day before*. Which is actually a good thing. But I don't want August tenth in Greenich. I want August tenth "here" (whereever "here" is, and I actually don't care). This should be easy to do. Just remove the "Z". Alas, JavaScript doesn't parse that correctly - it still interprets it as a UTC datetime. So I'll have to create a way of handling that:
+
+```JavaScript
+	// For now, fromISOString assumes that the date string is either UTC or local.
+	// It does not yet handle circumstances were a non-UTC timezone offset is included.
+	Date.fromISOString = function(dateStr) {
+		var timezoneOffset = '';
+		if(dateStr.subStr(dateStr.length - 1, 1) != 'Z') {
+			var offsetInMin = (new Date()).getTimezoneOffset();
+			var sign = (offsetInMin < 0) ? '+' : '-';
+			var offsetHr = ('00' + Math.floor(offsetInMin/60)).slice(-2);
+			var offsetMin = ('00' + (offsetInMin % 60)).slice(-2);
+			timezoneOffset = sign + offsetHr + ':' + offsetMin;
+		}
+		return new Date(dateStr + timezoneOffset);
+
+	};
+	Date.prototype.toISOLocalString = function() {
+		var offsetInMin = (new Date()).getTimezoneOffset();
+		var sign = (offsetInMin < 0) ? '-' : '+';
+		var offsetHr = ('00' + Math.floor(offsetInMin/60)).slice(-2);
+		var offsetMin = ('00' + (offsetInMin % 60)).slice(-2);
+		var timezoneOffset = sign + offsetHr + ':' + offsetMin;
+		var newDate = new Date(this.toISOString().replace('Z', timezoneOffset));
+		return newDate.toISOString().replace('Z', '');
+	};
+```
+
+This is great. Now I can send dates from the server in "Local ISO 8601" format, and it is semantically accurate, and fits my needs of timezone agnosticism. Of course, I need the server to be sure and send them in that format at all times. I'll leave that as an exercise for the reader, as server technologies vary widely. But anyone using Node.js is already there, as long as they marshal dates through the Date object.
+
+**Getting necessary forms of Date from the JS Date object**

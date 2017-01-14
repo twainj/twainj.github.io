@@ -1,0 +1,7 @@
+
+This post is about finding the actual functional differences between PhoneGap and Cordova.
+
+A brief link farm to point people to the conceptual differences - maybe yet another quote of the ionic blog - but then to business.
+
+The trick will be finding the actual code between the two.  Sintaxi/PhoneGap on GitHub seems to be the starting place for the PhoneGap code - it has the Android, iOS, and Windows platforms. The PhoneGap/PhoneGap repo seems to be truncated - have yet to figure out what that means.
+The Cordova code seems to be in different repos per platform on the Apache Git site (they are all mirrored to GitHub). So a start might be comparing the Android folder/repo between the two.

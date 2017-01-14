@@ -1,0 +1,7 @@
+
+
+Earlier today, I could actually, access my blog at twainj.github.io. Now I can't. I think the difference is that I removed the CNAME file for awhile, and now I have added it back. I'm testing what happens after I remove it again.
+
+I would expect to still be able to reach twainj.github.io, after setting the CNAME. The redirect is cool, if the other works, but the DNS may or not be working, I'm pretty dang sure that I've got it set up right.
+
+Docs seem to indicate that for a custom subdomain, only the CNAME record is necessary. Today I tried with the A Record, just in case. So far, no luck.
