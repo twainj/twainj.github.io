@@ -1,0 +1,17 @@
+After many reboots, and this last right in the middle of work that I was doing (I got the death threat, and dismissed it, thinking I could get everything saved, then got distracted by a stack overflow post I was working on),
+
+... I decided to actually call MS customer service. My thought - at best, I would complain, they would say "sorry, we can't help you, this is for the best, trust us", and I would make sure they understood that they would be getting a phone call from me EVERY TIME, this happened from here on out.
+
+BUT! I actually got some positive help. Not perfect, but quite acceptable for my needs. Turn off the Windows Update service!
+
+What this supposedly does:
+	No more updates. (not perfect)
+	No more notification of possible updates. (quite bad, actually)
+	Stops any pending update procedures - including the reboot (a glimmer of hope!)
+	
+How to do: turn the Windows Update service (in services.msc) to Disabled (rather than manual or automatic)
+I had thought I'd read that this would restart on next reboot, or that it would be automatically enabled in certain circumstances, or whatever,
+but this is purported to not be the case. And a quick test tells me that at least it doesn't happen on reboot. Great! I suspect my memory is of stopping the service (it gets restarted, even on Manual, maybe?)
+
+So I'm going to test this. I've left the service running, and when the next update happens, and I've hit the "wall", I'll stop the service and see if that allows me to continue indefinitely.
+
