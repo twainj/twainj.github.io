@@ -1,0 +1,3 @@
+This will mostly be a recipe, although I should point out a few interesting things in the middle of it.
+
+Use the FanconiRF bootstrap.ps1

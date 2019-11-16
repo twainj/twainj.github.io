@@ -1,0 +1,22 @@
+# Solve and Evolve
+an approach to system architecture design
+
+## Premise
+At each stage, evolve for the next stage, but no more than that.
+This creates instant value, and just-in-time quality.
+
+
+## When to Evolve
+
+As we move down this list, we are accounting for an expanding audience and an increased maintenance burden
+
+- Before Check-in (What belongs in VCS - security)
+- Before Push (What will other devs need in order to use it)
+- Before Prototype Deploy (prod-like environment bet limited stakeholder vectors)
+- Before QA Deploy (larger clientele, faster redeploy turnaround)
+- Before Prod Deploy (same as QA, but another order of magnitude, and structural bugs should be dealt with)
+
+## Qualifications
+Specifically addresses check-ins that change/define architecture.
+Absolutely use a previous solution, if you have it, and if it is valid for this *precise* set of technologies.
+However, don't introduce new technologies just because they have Arch solutions. The Arch needs to suit the app problem, not other arch problems.

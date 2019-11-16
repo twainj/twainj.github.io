@@ -1,0 +1,37 @@
+Building with Node on windows is more painful than it really should be.
+
+This is often because of node-gyp, which is a bit painful to use.
+
+I use Chocolatey, so this uses chocolatey to install all of the things that are necessary.
+You'll have to check the readme file for exact build instructions, but usually, it is something along the lines of:
+
+```
+git clone http://github/some-users/awesome-project
+cd awesome-project
+npm install
+npm run build
+```
+
+I'm trying to build the Kendo Open Source package for a specific version, so I'll use that as an example. It looks like they include the install process in the build script.
+
+First, of course, we need node/npm. It never hurts to use the most stable current version of Node.
+```
+choco install nodejs-lts -y
+```
+
+
+You may get errors about Python - saying that they can't find the executable, and suggesting that you set the PYTHON environment variable. This could be a bit of a goose chase. You specifically need Python 2 for node-gyp and the errors won't necessarily clue you in that you have the wrong version. If you install the correct version, you shouldn't need to set a path:
+```
+choco install python2
+```
+
+I saw an error that the windows SDK could not be found, so after a bit of searching, I had to install it. You may need the version for Windows 10, but mine specifically asked for Windows 8.1, so that's what I install:
+
+```
+choco install windows-sdk-8.1 -y
+```
+
+Another error (need to check what it was), because I had VS 2015 Community installed. So this was necessary. Note that even though the install script is built into the build script, in order to use this flag, I need to install explicitly.
+
+```
+npm install --msvs_version=2015

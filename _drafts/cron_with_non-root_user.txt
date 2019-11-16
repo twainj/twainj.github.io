@@ -1,0 +1,46 @@
+This was a good experience to share, since a lot of examples of how to use cron just use root.
+
+This text from README to Claudio Arce is a great starting place:
+
+## Installation of cron script
+Place a file in /etc/cron.d:
+
+`sudo nano /etc/cron.d/switchvox`
+
+And enter this line in it:
+
+`0 * * * * ubuntu php -f <webroot>/gen_sv_call_notes.php >> /var/log/sv2agemni_notesgen.log`
+
+**A few notes:**
+
+* The starting `0` means the script will run on the hour. Change if you would like to push it to a different time, e.g., `10` if you would like it to run 10 minutes after each hour.
+* The `ubuntu` entry is the user that the script will run under. `ubuntu` is usually the default user on an Ubuntu system, so it can be a good user to run under with less permissions than `root`. However, you have to make sure that `ubuntu` has the ability to write to log files in `/var/log`. See the section below about *Log User Permissions*.
+* The text after the `>>` operator is so that you have a log in case any errors occur. On success, you will see a *Note Generation complete* entry in the log. If for any reason there are errors, they should occur here, as long as your CLI PHP configuration is set to display errors. Your CLI PHP configuration may also have its own log file configured, in which case you may wish to omit this entry.
+
+**cron File Permissions**
+The file in the `cron.d` directory must very specifically **NOT** have any write permissions for the Group or Others. Cron will reject it if it does. So make sure that you set permissions to `644`:
+
+`sudo chmod 644 /etc/cron.d/switchvox`
+
+**Log User Permissions**
+In order for a user to be able to write out to log files in the `/var/log` folder, they must have proper permissions both on that *folder* and on the *file*. There is a user group in Ubuntu specifically set up for those permissions on the folder. It is the `adm` group. So you will want to make sure that the user that is set in the cron is in this group. In our case, we check the `ubuntu` user's groups:
+
+`groups ubuntu`
+
+This will list the groups that user is included in. If we don't see `adm`, we can add the user to that group:
+
+`sudo usermod ubuntu -aG adm`
+
+We also need to make sure that the file has the proper permissions to honor this group access. See the notes after for what each line accomplishes:
+
+1. `sudo touch /var/log/sv2agemni_notesgen.log`
+2. `sudo chown syslog /var/log/sv2agemni_notesgen.log`
+3. `sudo chgrp adm /var/log/sv2agemni_notesgen.log`
+4. `sudo chmod 664 /var/log/sv2agemni_notesgen.log`
+
+*NOTES*
+
+1. Create the file if it doesn't already exist.
+2. Change the owner of the file to `syslog`. This is a convention that I recommend, though it might work without this.
+3. Change the group access for the file to `adm`.
+4. Change the permissions such that group access is writable (the middle `6`)

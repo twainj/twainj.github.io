@@ -15,3 +15,46 @@ but this is purported to not be the case. And a quick test tells me that at leas
 
 So I'm going to test this. I've left the service running, and when the next update happens, and I've hit the "wall", I'll stop the service and see if that allows me to continue indefinitely.
 
+I've tested it. and we are not there yet. I got the death threat yesterday, and followed these instructions. I disabled the service, and left it running, when I left work last night. I had closed my laptop, and put it in sleep mode. When I got here this morning, the reboot had occurred, everything was closed, and I had a message saying that updates had been applied
+
+
+So I need to call up MS customer service again sometime and see what I got wrong.
+
+Update 10/18/2018 - 
+Got a reboot again today. I don't remember seeing the death threat, so I couldn't try this action. So I gave them a call again. It was very cordial, but I could tell the Customer Service Rep couldn't figure out what to do with me. Bottom line, I basicaly wasted his time. Which I guess is the point. Just be a squeaky wheel.
+
+I went ahead and wrote down a bit of information for next time though. 
+
+Number to call: 800-642-7676
+Answers:
+	"Home" user type (even though I use it for business, it is a "standalone" machine on a LAN, and not on a "network of 10 or more machines", and it only affects the one machine... because this is the only Win10 machine I tolerate)
+	"Technical Support"
+	"Windows"
+I guess those last few are pretty obvious.
+
+Case number: 1445287670 (might as well log it all in the same place)
+
+They also recommend that I use the "Feedback Hub" to let them know I would like this "feature".
+
+## Update 4/8/2019:
+Case Number: 1468249072
+agent: Daneesh
+New build coming in May, build 1903, will have the ability to Cancel reboot indefinitely. For now carry. So they tell me. But I just went through a post laying out the 1903 changes, and this was not among them - only a switch to disable updates. Bleh. But there may be a hack. Need to look into it more thoroughly:
+https://lazyadmin.nl/it/how-to-stop-automatic-restart-win-10-after-installing-updates/
+
+## Update 8/2/2019
+Case Number: 1479370865
+Agent: Surbhi
+Run winver (from run dlg) to find build number (remember, looking for 1903).
+1-800-642-7676
+Looks like I am still running 1803, so that is why. Apparently all these updates are not getting me to 1903. So When I re-do my machine, I *should* be installed to 1903, and have the options I seek. I will not call them back on this issue until I have the chance to do that.
+
+
+## Update 10/7/2019
+I helped a friend with a new computer which incluced an update to 1903. Looks like the settings are still paltry. A delay for 35 days max seems to be the new solution. Probably works for all practical purposes, at least for me, but I still balk at the principle of the thing.
+Interestingly, though, it appears that my computer has finally elected (or been elected) to download/install 1903, and for this update, I have come across a true solution. By accident: my computer doesn't have enough disk space to install/download the update. Install, I think, actually. At any rate, when it goes to try, it realizes that it will fail, throws me a warning, gives me an option to clean the drive, which I dismiss, b/c I don't have time, and I go on my merry way. So presumably, I could create a utility to fill the drive, which guards it from updates, until I am ready to update and reboot, at which time, said utility could clear the drive of whatever cruft it used, and allow the upate, reboot, etc. I might need to create this utility simply on principle.
+I think if I create such a utility, I will separate it into another blog post which can be more succinctly reddited and passed along.
+
+## Update 10/9/2019
+Well, nevermind. Win10 is dummer about its stupidity than I gave it credit for. I came in this morning to a machine that had been restarted for an update, *even though* it didn't actually have the space to apply them. Talk about a waste. So my theoretical utility won't work. 
+Unless it had enough space to apply a small update, but not enough for the feature update, about which it still complains. That's interesting. But that would mean that I don't even know the behavior when there is not enough space for those small updates. So it still might not work. Bleh.

@@ -1,0 +1,20 @@
+Would love to build a system that supports a pi zero that can be used for potentially many things, but mostly camera that can be worn on hat, and activated, bluetooth, through phone (app?)
+
+
+
+Parts that might be helpful:
+
+MoPi: powers Pi from multiple sources, at once, could include battery, solar, etc.
+https://shop.pimoroni.com/products/mopi-mobile-pi-power
+
+Lipo Battery power supply shim - might be good for battery-only power sourcing
+https://shop.pimoroni.com/products/zero-lipo
+
+Lithium-Polymer batteries - good size and power for mobile devicing - also compatible with the adafruit charger below
+https://www.adafruit.com/product/328
+
+Solar cells - lots of sizes at reasonable prices - not sure if they meet requirements yet.
+http://store.sundancesolar.com/small-solar-panels/
+
+Solar battery charger board - would work as a separate system for charging batteries.
+https://www.adafruit.com/product/390

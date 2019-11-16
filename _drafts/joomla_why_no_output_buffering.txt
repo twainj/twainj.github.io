@@ -1,0 +1,5 @@
+https://www.akeebabackup.com/support/akeeba-backup-3x/Ticket/27317-php-recommended-options.html
+
+says that Joomla uses its own buffer system.
+
+Need to look through the code and find this buffering system.

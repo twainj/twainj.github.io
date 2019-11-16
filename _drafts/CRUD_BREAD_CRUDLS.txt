@@ -1,0 +1,9 @@
+Realizing that the CRUD model left out the listing of entities, I was looking for how it should be added. I added L, but didn't like the CRUDL acronym. I thought maybe I could get on board if there was an S. CRUDLS ("crudless") kinda had the right ring. Did a bit of googling/wiking and found an article for a model called BREAD:
+
+http://paul-m-jones.com/archives/291
+
+Which I liked, as it added the "Browse" which I lacked. The comments were illuminating as well. I liked the ABCD acronym that someone came up with, except that the value of CRUD is that it has wrapped up in the word the data operations sense. ABCD, on the other hand, is so familiar that it has no hint as to context.
+
+Another comment also mentioned Search, which I feel is an important consideration, and also gives me my S. Though I could use it for BREADS or for CRUDLS, I think that CRUDLS wins, both for the ordering (the initial CRUD matches entity lifecycle better, though the Use case ordering of BREAD is also good), and because of the separation of LS from the rest. With CRUD, I can still refer to DB operations, but by adding LS, I get a full set of UI considerations.
+
+CRUDLS it is.
